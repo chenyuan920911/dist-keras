@@ -199,7 +199,6 @@ class SequentialWorker(Worker):
         while True:
             X, Y = self.get_next_minibatch()
             h = self.model.train_on_batch(X, Y)
-            self.add_history(h)
 
 
 class NetworkWorker(Worker):
