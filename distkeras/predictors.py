@@ -65,4 +65,4 @@ class ModelPredictor(Predictor):
         """Returns a dataframe which is the old dataframe with an additional
         prediction column.
         """
-        return dataframe.rdd.mapPartitions(self._predict).toDF()
+        return dataframe.rdd.mapPartitions(self._predict).toDF(samplingRatio=0.2)
