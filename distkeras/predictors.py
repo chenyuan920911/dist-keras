@@ -67,4 +67,4 @@ class ModelPredictor(Predictor):
         """
         from pyspark.sql import SparkSession
         spark = SparkSession.builder.getOrCreate()
-        return spark.createDataFrame(dataframe.rdd.mapPartitions(self._predict), samplingRatio=0.2)
+        return spark.createDataFrame(dataframe.rdd.mapPartitions(self._predict), samplingRatio=0.001)

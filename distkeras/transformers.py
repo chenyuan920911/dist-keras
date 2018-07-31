@@ -85,7 +85,7 @@ class MinMaxTransformer(Transformer):
         # Arguments
             dataframe: dataframe. Spark Dataframe.
         """
-        return spark.createDataFrame(dataframe.rdd.mapPartitions(self._transform), samplingRatio=0.2)
+        return spark.createDataFrame(dataframe.rdd.mapPartitions(self._transform), samplingRatio=0.001)
 
 
 class BinaryLabelTransformer(Transformer):
@@ -124,7 +124,7 @@ class BinaryLabelTransformer(Transformer):
         # Arguments
             dataframe: dataframe. Spark Dataframe.
         """
-        return spark.createDataFrame(dataframe.rdd.mapPartitions(self._transform), samplingRatio=0.2)
+        return spark.createDataFrame(dataframe.rdd.mapPartitions(self._transform), samplingRatio=0.001)
 
 
 class StandardTransformer(Transformer):
@@ -191,7 +191,7 @@ class StandardTransformer(Transformer):
         # For every feature, add a new column to the dataframe.
         for column in self.columns:
             self.current_column = column
-            dataframe = spark.createDataFrame(dataframe.rdd.mapPartitions(self._transform), samplingRatio=0.2)
+            dataframe = spark.createDataFrame(dataframe.rdd.mapPartitions(self._transform), samplingRatio=0.001)
 
         return dataframe
 
@@ -224,7 +224,7 @@ class DenseTransformer(Transformer):
         # Returns
             A transformed Spark Dataframe.
         """
-        return spark.createDataFrame(dataframe.rdd.mapPartitions(self._transform), samplingRatio=0.2)
+        return spark.createDataFrame(dataframe.rdd.mapPartitions(self._transform), samplingRatio=0.001)
 
 
 class ReshapeTransformer(Transformer):
@@ -262,7 +262,7 @@ class ReshapeTransformer(Transformer):
         # Returns
             A transformed Spark Dataframe.
         """
-        return spark.createDataFrame(dataframe.rdd.mapPartitions(self._transform), samplingRatio=0.2)
+        return spark.createDataFrame(dataframe.rdd.mapPartitions(self._transform), samplingRatio=0.001)
 
 
 class OneHotTransformer(Transformer):
@@ -298,7 +298,7 @@ class OneHotTransformer(Transformer):
         # Returns
             A Spark Dataframe with one-hot encoded features.
         """
-        return spark.createDataFrame(dataframe.rdd.mapPartitions(self._transform), samplingRatio=0.2)
+        return spark.createDataFrame(dataframe.rdd.mapPartitions(self._transform), samplingRatio=0.001)
 
 
 class LabelIndexTransformer(Transformer):
@@ -349,4 +349,4 @@ class LabelIndexTransformer(Transformer):
         # Returns
             A Spark Dataframe with a "predicted" index.
         """
-        return spark.createDataFrame(dataframe.rdd.mapPartitions(self._transform), samplingRatio=0.2)
+        return spark.createDataFrame(dataframe.rdd.mapPartitions(self._transform), samplingRatio=0.001)
