@@ -65,4 +65,6 @@ class ModelPredictor(Predictor):
         """Returns a dataframe which is the old dataframe with an additional
         prediction column.
         """
-        return dataframe.rdd.mapPartitions(self._predict).toDF(samplingRatio=0.2)
+        from pyspark.sql import SparkSession
+        spark = SparkSession.builder.getOrCreate()
+        return spark.createDataFrame(dataframe.rdd.mapPartitions(self._predict), samplingRatio=0.2)
