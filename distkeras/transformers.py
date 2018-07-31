@@ -83,7 +83,9 @@ class MinMaxTransformer(Transformer):
         # Arguments
             dataframe: dataframe. Spark Dataframe.
         """
-        return dataframe.rdd.map(self._transform).toDF()
+          from pyspark.sql import SparkSession
+        spark = SparkSession.builder.getOrCreate()
+        return spark.createDataFrame(dataframe.rdd.mapPartitions(self._transform), samplingRatio=0.2)
 
 
 class BinaryLabelTransformer(Transformer):
